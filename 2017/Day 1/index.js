@@ -2,9 +2,7 @@ var fs = require('fs');
 
 // Read the input data
 fs.readFile('data.txt', 'UTF-8', (err, data) => {
-    if (err) {
-        throw new Error(err);
-    }
+    if (err) { throw new Error(err); }
 
     // Solves part one
     // Current digit is compared to the next one (modulo to reset to 0 if you are at the end of the list)
