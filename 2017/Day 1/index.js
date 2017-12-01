@@ -8,7 +8,7 @@ fs.readFile('data.txt', 'UTF-8', (err, data) => {
     // Current digit is compared to the next one (modulo to reset to 0 if you are at the end of the list)
     var partOneAnswer = solver(data, (currentIndex, totalLength) => (currentIndex + 1) % totalLength);
 
-    // Solves part one
+    // Solves part two
     // Current digit is compared to the digit halfway around the circular list (modulo to reset to 0 if you are at the end of the list)
     var partTwoAnswer = solver(data, (currentIndex, totalLength) => (currentIndex + (totalLength / 2)) % totalLength);
 
