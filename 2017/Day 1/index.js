@@ -6,11 +6,11 @@ fs.readFile('data.txt', 'UTF-8', (err, data) => {
 
     // Solves part one
     // Current digit is compared to the next one (modulo to reset to 0 if you are at the end of the list)
-    var partOneAnswer = solver(data, (currentIndex, totalLenght) => (currentIndex + 1) % totalLenght);
+    var partOneAnswer = solver(data, (currentIndex, totalLength) => (currentIndex + 1) % totalLength);
 
     // Solves part one
     // Current digit is compared to the digit halfway around the circular list (modulo to reset to 0 if you are at the end of the list)
-    var partTwoAnswer = solver(data, (currentIndex, totalLenght) => (currentIndex + (totalLenght / 2)) % totalLenght);
+    var partTwoAnswer = solver(data, (currentIndex, totalLength) => (currentIndex + (totalLength / 2)) % totalLength);
 
     console.log(`Part one: ${partOneAnswer}`);
     console.log(`Part two: ${partTwoAnswer}`);
