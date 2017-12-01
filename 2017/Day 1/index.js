@@ -20,7 +20,7 @@ fs.readFile('data.txt', 'UTF-8', (err, data) => {
 
 
 function solver(data, computeNextValue) {
-    var totalSum = Array.from(data).reduce((currentSum, value, i) => {
+    return Array.from(data).reduce((currentSum, value, i) => {
         // Compute the next index to check based on the challenge
         var nextIndex = computeNextValue(i, data.length);
 
@@ -31,6 +31,4 @@ function solver(data, computeNextValue) {
 
         return currentSum;
     }, 0);
-
-    return totalSum;
 }
