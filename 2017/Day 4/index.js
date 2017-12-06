@@ -4,11 +4,28 @@ var fs = require('fs');
 fs.readFile('data.txt', 'UTF-8', (err, data) => {
     if (err) { throw new Error(err); }
 
-    // Return the list of valid passphareses
-    var listOfValidPassPhrases = data.split('\r\n').reduce((listOfValidPassPhrases, passphrase) => {
+    // Get the list of passphrases
+    var listOfPassphrases = data.split('\r\n');
+
+    console.log(`Part one: ${solver(listOfPassphrases, false).length}`);
+    console.log(`Part two: ${solver(listOfPassphrases, true).length}`);
+});
+
+function solver(listOfPassphrases, checkForAnagrams) {
+    if (checkForAnagrams) {
+        // First pass if we need to also check for anagrams
+        listOfPassphrases = solver(listOfPassphrases, false);
+    }
+
+    return listOfPassphrases.reduce((listOfValidPassPhrases, passphrase) => {
         var isValid = true;
+
         // Check each word for a duplicate
         passphrase.split(' ').reduce((words, word) => {
+
+            // If we need to check for anagrams, we should first sort the password
+            word = checkForAnagrams ? Array.from(word).sort().join('') : word;
+
             if (words.indexOf(word) != -1) {
                 isValid = false;
             } else {
@@ -25,34 +42,4 @@ fs.readFile('data.txt', 'UTF-8', (err, data) => {
 
         return listOfValidPassPhrases;
     }, []);
-
-    console.log(`Part one: ${listOfValidPassPhrases.length}`);
-
-
-    // From the list of validPassPhrases, reject those how are anagrams of each other
-    listOfValidPassPhrases = listOfValidPassPhrases.reduce((passphraseWithoutAnagrams, passphrase) => {
-        var isValid = true;
-        // Check each word for a duplicate
-        passphrase.split(' ').reduce((words, word) => {
-
-            // Sort the word so anagrams are identical
-            word = Array.from(word).sort().join('');
-            if (words.indexOf(word) != -1) {
-                isValid = false;
-            } else {
-                words.push(word);
-            }
-
-            return words;
-        }, []);
-
-        // Add the valid passphrase to the list
-        if (isValid) {
-            passphraseWithoutAnagrams.push(passphrase);
-        }
-
-        return passphraseWithoutAnagrams;
-    }, []);
-
-    console.log(`Part two: ${listOfValidPassPhrases.length}`);
-});
+}
