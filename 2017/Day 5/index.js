@@ -1,7 +1,7 @@
 var fs = require('fs');
 
 // Read the input data
-fs.readFile('2017/Day 5/data.txt', 'UTF-8', (err, data) => {
+fs.readFile('data.txt', 'UTF-8', (err, data) => {
     if (err) { throw new Error(err); }
 
     // Format the data
